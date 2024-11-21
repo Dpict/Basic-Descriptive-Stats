@@ -1,0 +1,63 @@
+import math
+
+def mean(x):
+    return sum(x)/len(x)
+
+def median(x):
+    sorted_scores = sorted(x)
+    n = len(sorted_scores)
+    if n % 2 == 0:
+        return (sorted_scores[n // 2 - 1] + sorted_scores[n // 2]) / 2
+    else:
+        return sorted_scores[n // 2]
+
+def range(x, y):
+    return (x) - (y)// len(x)
+
+def st_dev(x,y,z):
+    return math.sqrt(sum((xi-y)**2 for xi in x) /(len(z)- 1))
+
+def st_dev2(x, y, z):
+        sumsquares = 0
+        i = 0
+        n = len(z)
+        if n < 2:
+            return "0"
+        while i < n:
+            sumsquares += (x[i] - y)**2
+            i += 1
+
+        variance = sumsquares/(n - 1)
+        return math.sqrt(variance)
+
+def standardization(x,y,z):
+    return (x-y)/z
+
+def dev_scores(x):
+    return (x * 10) + 50
+
+
+input_string = input("Enter grades (comma-separated): ")
+try:
+  a_1 = [float(x.strip()) for x in input_string.replace(',', ' ').split()]
+  print("Values are Correct!", a_1)
+except ValueError:
+  print("Invalid Input Detected: Non Numeric Grades Detected")
+
+
+a2 = float(input("Enter your Grade: "))
+
+Mean = mean(a_1)
+Median = median(a_1)
+grade_range = a2 - Mean
+Std_dev = st_dev2(a_1, Mean, (a_1))
+Standardization = standardization(a2,Mean,Std_dev)
+T_Score = dev_scores(Standardization)
+
+print(f"Your Grade: {a2}")
+print(f"Average: {Mean}")
+print(f"Midpoint: {Median}")
+print(f"Difference from Average: {grade_range}")
+print(f"Standard Deviation of the Class: {Std_dev}")
+print(f"Standardized Score of your Grade: {Standardization}")
+print(f"The T-score: {T_Score}")
